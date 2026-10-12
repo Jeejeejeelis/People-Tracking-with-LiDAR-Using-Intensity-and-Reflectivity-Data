@@ -1,7 +1,9 @@
 # People Tracking with LiDAR Using Intensity and Reflectivity Data
 
 <p align="center">
-  <img src="docs/assets/system_architecture.png" alt="System Architecture Diagram" width="90%"/>
+  <img src="docs/assets/system_architecture.png" alt="Figure 3.1: 3D Perception and Tracking Pipeline" width="95%"/>
+  <br>
+  <em><b>Figure 3.1:</b> Overview of the 3D perception and tracking pipeline. Sequential data flow from raw LiDAR point clouds through radiometric preprocessing, 3D deep detection backbones, and the DeepSORT-lite Kalman filter tracking engine.</em>
 </p>
 
 <p align="center">
@@ -29,34 +31,53 @@ Using the **Pedestrian-Focus Scene Dataset (PFSD)** featuring high-density 128-b
 
 ---
 
-## 💡 Input Feature Representations
+## 🔬 Radiometric Calibration & Anti-Ghosting Pipeline
+
+### Figure 3.3: Radiometric Preprocessing Pipeline
+The raw physics calibration equation ($R = I \cdot d^2$) produces an extreme heavy-tailed distribution with astronomical numerical outliers that destabilize the non-parametric `MeanVFE` (Voxel Feature Encoder). We stabilize this signal via logarithmic compression, 99th-percentile Winsorization (clipping), and Z-score standardization:
 
 <p align="center">
-  <img src="docs/assets/feature_variants.png" alt="Feature Variants" width="85%"/>
+  <img src="docs/assets/reflectivity_pipeline.png" alt="Figure 3.3: Radiometric Calibration Pipeline" width="90%"/>
+  <br>
+  <em><b>Figure 3.3:</b> The radiometric calibration pipeline. Raw quadratic scaling is stabilized through logarithmic compression, 99th-percentile Winsorization, and Z-score standardization, neutralizing extreme return spikes before voxelization.</em>
 </p>
 
-1. **Baseline ($I$)**: Raw uncalibrated sensor return intensity ($x, y, z, I$).
-2. **Reflectivity Swap ($R$)**: Raw intensity is replaced entirely with distance-compensated reflectivity ($x, y, z, R$) where $R = I \cdot d^2$.
-3. **Feature Decoupling ($I, d$)**: Supplies raw intensity and Euclidean range distance as separate, uncoupled channels ($x, y, z, I, d$).
-4. **Reflectivity-Enhanced ($I, R$)**: Appends log-Winsorized reflectivity directly alongside raw intensity ($x, y, z, I, R$).
-5. **Multi-Modal ($I, R, d$)**: Combines calibrated reflectivity, raw intensity, and range distance ($x, y, z, I, R, d$).
-
-### Robust Reflectivity Preprocessing Pipeline
-To prevent astronomical numerical outliers from collapsing the Voxel Feature Encoder (VFE), reflectivity values undergo 99th percentile Winsorization (clipping), logarithmic scaling, and Z-score standardization:
+### Figure 3.2: Anti-Ghosting Temporal Decay
+When accumulating multi-sweep temporal point clouds (10 sweeps), moving pedestrians leave smeared material "footprints" in historical sweeps. We introduce an exponential radiometric decay factor $w(t) = e^{-\lambda |t|}$ (with $\lambda = 2.5$) applied exclusively to historical intensity and reflectivity channels:
 
 <p align="center">
-  <img src="docs/assets/reflectivity_pipeline.png" alt="Reflectivity Pipeline" width="85%"/>
+  <img src="docs/assets/anti_ghosting_decay.png" alt="Figure 3.2: Exponential Anti-Ghosting Decay" width="65%"/>
+  <br>
+  <em><b>Figure 3.2:</b> Exponential anti-ghosting temporal decay curve ($w(t) = e^{-2.5t}$). Historical material signatures are rapidly suppressed to eliminate ghost footprints while preserving spatial velocity trails for motion estimation.</em>
 </p>
+
+---
+
+## 💡 Evaluated Feature Variants
+
+### Figure 3.4: Evaluated Point Feature Configurations
+
+<p align="center">
+  <img src="docs/assets/feature_variants.png" alt="Figure 3.4: Evaluated Point Feature Configurations" width="90%"/>
+  <br>
+  <em><b>Figure 3.4:</b> Five input variants designed to systematically isolate the contributions of spatial geometry, raw intensity, calibrated reflectivity, and range distance.</em>
+</p>
+
+1. **Baseline ($I$)**: Retains raw uncalibrated sensor return intensity ($x, y, z, I, t$).
+2. **Reflectivity Swap ($R$)**: Replaces raw intensity entirely with calibrated reflectivity ($x, y, z, R, d, t$).
+3. **Feature Decoupling ($I, d$)**: Supplies raw intensity and Euclidean range distance as separate, uncoupled channels ($x, y, z, I, d, t$).
+4. **Reflectivity-Enhanced ($I, R$)**: Appends calibrated reflectivity directly alongside raw intensity ($x, y, z, I, R, t$).
+5. **Multi-Modal ($I, R, d$)**: Fuses calibrated reflectivity, raw intensity, and range distance ($x, y, z, I, R, d, t$).
 
 ---
 
 ## 📊 Master Thesis Benchmark Results
 
-> **Note on Data Authenticity**: All metrics below are taken directly from the official Master's Thesis Chapter 5 (`latex/Current_Version/chapters/05_results.tex`), evaluated across 160-epoch models on the PFSD 128-beam LiDAR benchmark.
+> **Official Data Source**: Taken directly from Master's Thesis Chapter 5 (`latex/Current_Version/chapters/05_results.tex`), evaluated on the PFSD 128-beam validation benchmark after 160 training epochs.
 
-### 1. 3D Pedestrian Detection Performance (3D mAP)
+### Table 5.1: 3D Pedestrian Detection Performance (3D mAP)
 
-Evaluated across four Euclidean distance matching thresholds ($0.5$ m, $1.0$ m, $2.0$ m, and $4.0$ m) on the PFSD validation set:
+Evaluated across four Euclidean distance matching thresholds ($0.5$ m, $1.0$ m, $2.0$ m, and $4.0$ m):
 
 | Model Architecture | Feature Variant | mAP | AP @ 0.5m | AP @ 1.0m | AP @ 2.0m | AP @ 4.0m |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
@@ -83,7 +104,7 @@ Evaluated across four Euclidean distance matching thresholds ($0.5$ m, $1.0$ m, 
 
 ---
 
-### 2. Multi-Model 3D Pedestrian Tracking Performance
+### Table 5.2: Multi-Model 3D Pedestrian Tracking Performance
 
 Evaluated on PFSD validation sequences with the DeepSORT-lite Kalman filter tracker at optimal parameter settings:
 
@@ -95,12 +116,12 @@ Evaluated on PFSD validation sequences with the DeepSORT-lite Kalman filter trac
 |:---|:---|:---:|:---:|:---:|:---:|
 | **CenterPoint** | **Baseline ($I$)** | **0.745** | 0.3973 | 0.3873 | 2,415 |
 | **CenterPoint** | Reflectivity Swap ($R$) | 0.000 | 0.0000 | 0.0000 | 0 |
-| **CenterPoint** | Feature Decoupling ($I, d$) | 0.727 | 0.3799 | 0.3651 | **540** |
+| **CenterPoint** | Feature Decoupling ($I, d$) | 0.727 | 0.3799 | 0.3651 | **540** *(slashed by 78%)* |
 | **CenterPoint** | Reflectivity Enhanced ($I, R$) | 0.716 | 0.3737 | 0.3602 | 2,786 |
-| **CenterPoint** | **Multi-Modal ($I, R, d$)** | 0.681 | **0.4006** | **0.3912** | 682 |
+| **CenterPoint** | **Multi-Modal ($I, R, d$)** | 0.681 | **0.4006** | **0.3912** | **682** *(best continuity)* |
 | **VoxelNeXt** | Baseline ($I$) | 0.699 | 0.3175 | 0.3090 | 3,557 |
 | **VoxelNeXt** | Reflectivity Swap ($R$) | 0.245 | 0.2013 | 0.1854 | 717 |
-| **VoxelNeXt** | Feature Decoupling ($I, d$) | 0.701 | 0.3204 | 0.3154 | 641 |
+| **VoxelNeXt** | Feature Decoupling ($I, d$) | 0.701 | 0.3204 | 0.3154 | **641** *(slashed by 82%)* |
 | **VoxelNeXt** | Reflectivity Enhanced ($I, R$) | 0.703 | 0.3210 | 0.3167 | 3,675 |
 | **VoxelNeXt** | **Multi-Modal ($I, R, d$)** | **0.711** | **0.3322** | **0.3241** | **534** |
 | **HMFN** | Baseline ($I$) | 0.717 | 0.3659 | 0.3496 | 573 |
@@ -113,6 +134,16 @@ Evaluated on PFSD validation sequences with the DeepSORT-lite Kalman filter trac
 | **PointPillars** | Feature Decoupling ($I, d$) | 0.000 | 0.1782 | 0.1519 | 719 |
 | **PointPillars** | Reflectivity Enhanced ($I, R$) | 0.000 | 0.0000 | 0.0000 | 719 |
 | **PointPillars** | Multi-Modal ($I, R, d$) | 0.000 | 0.0000 | 0.0000 | 719 |
+
+---
+
+## 🔍 Figure 5.2: Qualitative Tracking Comparison
+
+<p align="center">
+  <img src="docs/assets/qualitative_tracking_comparison_frames_053_054.jpg" alt="Figure 5.2: Qualitative Tracking Comparison Frames 053 and 054" width="100%"/>
+  <br>
+  <em><b>Figure 5.2:</b> Qualitative tracking comparison across consecutive frames 053 and 054 in crowded conditions. The panels illustrate key architectural failure modes: HMFN suffers from ID switches (evident from bounding box color changes during dense crossover), VoxelNeXt drops foreground pedestrian proposals, and CenterPoint produces false positive ghost tracks in the upper right quadrant.</em>
+</p>
 
 ---
 
@@ -143,7 +174,7 @@ Supplying intensity and range distance as independent channels $(I, d)$ allows t
 
 ---
 
-## 🎯 Optimal Tracker Parameters (Reproducibility)
+## 🎯 Table 5.3: Optimal Tracker Parameters (Reproducibility)
 
 The table records the exact distance gating threshold ($D$), confidence score filter ($F$), and reflectivity appearance penalty weight ($R$) identified via grid search:
 
@@ -205,7 +236,7 @@ The table records the exact distance gating threshold ($D$), confidence score fi
 │   ├── visualize_projection.py          # Point cloud to video feed projection
 │   └── generate_thesis_tables.py        # Summary table generation
 ├── docs/                                # Thesis figures, charts, and methodology notes
-│   ├── assets/                          # Embedded PNG figures and diagrams
+│   ├── assets/                          # Embedded PNG/JPG figures and diagrams
 │   ├── charts/                          # Figure generator scripts (.py) and PDFs
 │   ├── architecture/                    # System architecture diagrams
 │   └── processAndFindings.md            # Technical development log
