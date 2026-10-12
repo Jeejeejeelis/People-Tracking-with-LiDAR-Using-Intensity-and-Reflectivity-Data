@@ -234,17 +234,15 @@ The table records the exact distance gating threshold ($D$), confidence score fi
 │   ├── reflectivity_normalization.py   # Robust reflectivity filter (Winsorization + Z-score)
 │   ├── run_pfsd_visual_debug.py         # 3D bounding box visual debug on camera feeds
 │   ├── visualize_projection.py          # Point cloud to video feed projection
+│   ├── download_weights.sh              # Automated script to download model checkpoints
 │   └── generate_thesis_tables.py        # Summary table generation
-├── docs/                                # Thesis figures, charts, and methodology notes
+├── docs/                                # Thesis figures and assets
 │   ├── assets/                          # Embedded PNG/JPG figures and diagrams
 │   ├── charts/                          # Figure generator scripts (.py) and PDFs
-│   ├── architecture/                    # System architecture diagrams
-│   └── processAndFindings.md            # Technical development log
+│   └── architecture/                    # System architecture diagrams (.py and .pdf)
 ├── results/                             # Benchmark evaluation logs and metrics summaries
-│   ├── final_thesis_results_all.md      # Consolidated master metrics table
 │   └── ...                              # Per-model JSON metrics and evaluation plots
-├── weights/                             # Directory for model checkpoints (.pth)
-│   └── README.md                        # Checkpoint inventory and instructions
+├── weights/                             # Target directory for model checkpoints (.pth)
 ├── requirements.txt                     # Python dependencies
 ├── setup_env.sh                         # Automated environment setup script
 └── README.md
@@ -268,6 +266,57 @@ In every new shell session:
 ```bash
 source venv/bin/activate
 export PYTHONPATH=$(pwd):$(pwd)/PFSD:$(pwd)/OpenPCDet:$PYTHONPATH
+```
+
+---
+
+## 📥 Pre-trained Model Weights
+
+Pre-trained model checkpoints (trained for 160 epochs on PFSD) are hosted on [GitHub Releases (v1.0.0)](https://github.com/Jeejeejeelis/People-Tracking-with-LiDAR-Using-Intensity-and-Reflectivity-Data/releases/tag/v1.0.0).
+
+Use the automated download script to fetch weights into the `weights/` directory:
+
+```bash
+# Download top champion models for each architecture (~800 MB)
+./tools/download_weights.sh best
+
+# Or download all 20 ablation checkpoints (~2.9 GB)
+./tools/download_weights.sh all
+
+# Or download a specific model checkpoint
+./tools/download_weights.sh hmfn_baseline_160.pth
+```
+
+---
+
+## 📦 Dataset Preparation (PFSD)
+
+This project evaluates on the **Pedestrian-Focus Scene Dataset (PFSD)**:
+- **Paper**: [arXiv:2502.15342](https://arxiv.org/abs/2502.15342) (*PFSD: A Multi-Modal Pedestrian-Focus Scene Dataset for Rich Tasks in Semi-Structured Environments*)
+- **Official GitHub**: [https://github.com/VSlabRobotics/PFSD](https://github.com/VSlabRobotics/PFSD)
+- **Direct Downloads**:
+  - [Google Drive Download (Official)](https://drive.google.com/file/d/1r1v4CIufKhdU9P0-_bd-xLViRQiEA5WX/view?usp=sharing)
+  - [Baidu Netdisk (Official)](https://pan.baidu.com/s/19DN4csVlMnrIYOKByBrZvQ) (Extract code: `pfsd`)
+
+### Directory Layout
+Extract the dataset into `data/pfsd/v1.0-mini`:
+```
+data/pfsd/
+└── v1.0-mini/
+    ├── samples/
+    │   ├── LIDAR_TOP/
+    │   └── CAM_FRONT/
+    ├── sweeps/
+    │   └── LIDAR_TOP/
+    ├── v1.0-mini/ (JSON annotation metadata)
+    └── pfsd_infos_10sweeps_val.pkl
+```
+
+Generate metadata infos using the feature-aware PFSD dataloader:
+```bash
+python -m pcdet.datasets.nuscenes.nuscenes_dataset \
+    --func create_nuscenes_infos \
+    --cfg_file configs/pfsd_dataset_baseline.yaml
 ```
 
 ---
