@@ -47,6 +47,8 @@ weights/*.pth
 *.jpg
 *.jpeg
 *.mp4
+!docs/assets/*.png
+!docs/assets/*.jpg
 visualizations/
 test_vis/
 output/
