@@ -1,58 +1,174 @@
 # People Tracking with LiDAR Using Intensity and Reflectivity Data
 
-> **Master's Thesis Project**  
-> *A systematic study of radiometric LiDAR representations (Intensity vs. Distance-Compensated Reflectivity vs. Feature Decoupling) across 2D, 3D Sparse Voxel, and Hybrid Multi-Scale Attention architectures on dense 128-beam pedestrian crowds.*
+<p align="center">
+  <img src="docs/assets/system_architecture.png" alt="System Architecture Diagram" width="90%"/>
+</p>
+
+<p align="center">
+  <a href="#-abstract--research-overview"><img src="https://img.shields.io/badge/Thesis-Aalto_University-blue.svg" alt="Thesis Aalto University"></a>
+  <a href="#-master-thesis-benchmark-results"><img src="https://img.shields.io/badge/Benchmark-PFSD_128--Beam-green.svg" alt="PFSD 128-Beam"></a>
+  <a href="#-installation--environment-setup"><img src="https://img.shields.io/badge/Python-3.8_|_3.10-yellow.svg" alt="Python Version"></a>
+  <a href="#-installation--environment-setup"><img src="https://img.shields.io/badge/PyTorch-1.12_|_2.x-orange.svg" alt="PyTorch"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey.svg" alt="License"></a>
+</p>
+
+> **Master's Thesis**  
+> *School of Electrical Engineering, Aalto University*  
+> Author: **Eelis Pinomaa**  
+> A systematic investigation of radiometric LiDAR representations across 2D, 3D Sparse Voxel, and Hybrid Multi-Scale Attention architectures on dense 128-beam pedestrian crowds.
 
 ---
 
 ## 📌 Abstract & Research Overview
 
-Accurate 3D multi-object tracking (MOT) of pedestrians is vital for autonomous vehicles and mobile robots operating in crowded urban environments. While LiDAR spatial coordinates ($x, y, z$) provide precise geometry, raw return **intensity** ($I$) is severely attenuated by distance according to the radar range equation ($P_r \propto \frac{\sigma}{d^4}$ or $\frac{\sigma}{d^2}$ for extended Lambertian targets).
+Accurate 3D multi-object tracking (MOT) of pedestrians in crowded environments is essential for safe autonomous driving and robotics navigation. While 3D coordinates ($x, y, z$) provide structural spatial geometry, raw return **intensity** ($I$) is heavily attenuated across distance by the radar range equation ($P_r \propto \frac{\sigma}{d^4}$ for point targets, or $\frac{\sigma}{d^2}$ for extended Lambertian surfaces).
 
-This thesis investigates whether augmenting deep neural networks and multi-object trackers with **distance-compensated reflectivity** ($R \approx I \cdot d^2$) or **feature decoupling** ($I, d$) enhances pedestrian detection and trajectory continuity in dense crowds.
+This thesis investigates whether augmenting neural detectors and kinematic trackers with **calibrated reflectivity** ($R \approx I \cdot d^2$), **feature decoupling** ($I, d$), or **multi-modal fusion** ($I, R, d$) improves pedestrian detection and trajectory continuity in dense crowds.
 
-Using the **PFSD (Pedestrian-Focus Scene Dataset)** featuring a high-density 128-beam LiDAR, we benchmark 4 distinct neural architectures across 4 input representations, evaluated via a **DeepSORT-lite Kalman Filter state machine** and the **Multi-Metric Triad** (AMOTA, MOTA, HOTA [DetA/AssA/LocA], and IDF1).
+Using the **Pedestrian-Focus Scene Dataset (PFSD)** featuring high-density 128-beam LiDAR, we systematically benchmark 4 neural architectures across 5 input feature variants, evaluated via a **DeepSORT-lite Kalman Filter state machine** and the **Multi-Metric Triad** (AMOTA, MOTA, HOTA [DetA/AssA/LocA], and IDF1).
 
 ---
 
-## 🔬 Core Discoveries & Academic Findings
+## 💡 Input Feature Representations
 
-1. **The 2D Compression Failure (PointPillars)**:  
-   Architectures employing early vertical compression (collapsing the Z-axis into 2D pillars) inherently fail on dense 128-beam crowds, collapsing to **0.0% AMOTA**. They generate over 16,000 false-positive "ghost" detections because vertical noise (poles, street signs, foliage) cannot be separated from pedestrian torsos in bird's-eye view (BEV).
+<p align="center">
+  <img src="docs/assets/feature_variants.png" alt="Feature Variants" width="85%"/>
+</p>
 
-2. **The Reflectivity Paradox (The Physics Equation Failure)**:  
-   Directly swapping raw Intensity with the hardcoded physical equation $R = I \cdot d^2$ catastrophically degrades tracking across all functioning architectures (HMFN drops from 71.7% to 36.8% AMOTA). Distance compensation artificially inflates distant retro-reflective background objects so heavily that their neural response distribution overlaps with pedestrians, causing tracking algorithms to fracture identities.
+1. **Baseline ($I$)**: Raw uncalibrated sensor return intensity ($x, y, z, I$).
+2. **Reflectivity Swap ($R$)**: Raw intensity is replaced entirely with distance-compensated reflectivity ($x, y, z, R$) where $R = I \cdot d^2$.
+3. **Feature Decoupling ($I, d$)**: Supplies raw intensity and Euclidean range distance as separate, uncoupled channels ($x, y, z, I, d$).
+4. **Reflectivity-Enhanced ($I, R$)**: Appends log-Winsorized reflectivity directly alongside raw intensity ($x, y, z, I, R$).
+5. **Multi-Modal ($I, R, d$)**: Combines calibrated reflectivity, raw intensity, and range distance ($x, y, z, I, R, d$).
 
-3. **The Feature Decoupling Triumph**:  
-   Instead of hardcoding the physical calibration, feeding **decoupled intensity and range** ($I$ and $d$) allows 3D sparse voxel networks (CenterPoint, VoxelNeXt) to dynamically learn sensor-specific calibration curves natively. CenterPoint and VoxelNeXt both rocket from unviable baselines to **70.3% AMOTA**.
+### Robust Reflectivity Preprocessing Pipeline
+To prevent astronomical numerical outliers from collapsing the Voxel Feature Encoder (VFE), reflectivity values undergo 99th percentile Winsorization (clipping), logarithmic scaling, and Z-score standardization:
 
-4. **HMFN Architectural Superiority**:  
-   HMFN's native Hybrid Multi-Scale Attention handles dense feature extraction so effectively that its standard 5-feature baseline achieves the highest overall benchmark score (**71.7% AMOTA**).
-
-5. **The Multi-Metric Triad Insight (Detection vs. Association)**:  
-   Evaluating with HOTA reveals that while reflectivity signals enhance raw neural detection sensitivity (**DetA increases**), naive tracker matching suffers massive identity swaps (**AssA and IDF1 plummet**). Dynamic distance-dependent thresholding and calibrated reflectivity appearance signatures are required to recover association stability.
+<p align="center">
+  <img src="docs/assets/reflectivity_pipeline.png" alt="Reflectivity Pipeline" width="85%"/>
+</p>
 
 ---
 
 ## 📊 Master Thesis Benchmark Results
 
-All models were trained for **160 epochs** on the PFSD 128-beam LiDAR dataset and evaluated at a standardized `0.4` confidence threshold using the DeepSORT-lite Kalman tracker:
+> **Note on Data Authenticity**: All metrics below are taken directly from the official Master's Thesis Chapter 5 (`latex/Current_Version/chapters/05_results.tex`), evaluated across 160-epoch models on the PFSD 128-beam LiDAR benchmark.
 
-| Architecture | Input Representation | Input Channels | AMOTA ↑ | HOTA ↑ | DetA ↑ | AssA ↑ | LocA ↑ | IDF1 ↑ |
-|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **HMFN** | **Baseline (Raw Intensity)** | $x, y, z, I, t$ | **71.7%** | 14.3% | 36.2% | 5.6% | **89.3%** | 10.1% |
-| **HMFN** | Decoupled | $x, y, z, I, d, t$ | 68.9% | 13.4% | 33.8% | 5.3% | **89.3%** | 9.2% |
-| **HMFN** | Kitchen Sink | $x, y, z, I, R, d, t$ | 68.0% | 13.9% | 35.9% | 5.4% | 88.2% | 9.8% |
-| **HMFN** | Swap (Reflectivity) | $x, y, z, R, d, t$ | 36.8% | 28.9% | 46.2% | 18.1% | 84.0% | 28.1% |
-| **CenterPoint** | True 3D Baseline | $x, y, z, I, t$ | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| **CenterPoint** | **Decoupled** | $x, y, z, I, d, t$ | **70.3%** | 17.9% | 39.8% | 8.1% | 77.8% | 16.8% |
-| **CenterPoint** | Kitchen Sink | $x, y, z, I, R, d, t$ | 68.2% | 25.3% | 52.1% | 12.3% | 87.0% | 22.7% |
-| **CenterPoint** | Swap (Reflectivity) | $x, y, z, R, d, t$ | 68.6% | **38.6%** | **67.2%** | **22.2%** | 87.4% | **37.3%** |
-| **VoxelNeXt** | Baseline | $x, y, z, I, t$ | 38.5% | 14.9% | 39.3% | 5.7% | 76.0% | 11.5% |
-| **VoxelNeXt** | **Decoupled** | $x, y, z, I, d, t$ | **70.3%** | 21.7% | 43.4% | 10.8% | 88.0% | 18.7% |
-| **VoxelNeXt** | Kitchen Sink | $x, y, z, I, R, d, t$ | 58.7% | 21.6% | 44.7% | 10.5% | 87.9% | 18.6% |
-| **VoxelNeXt** | Swap (Reflectivity) | $x, y, z, R, d, t$ | 70.1% | 30.5% | 56.5% | 16.5% | 87.5% | 30.0% |
-| **PointPillars** | Swap (Reflectivity) | $x, y, z, R, d, t$ | 0.0% | 17.9% | 30.3% | 10.6% | 69.0% | 15.1% |
+### 1. 3D Pedestrian Detection Performance (3D mAP)
+
+Evaluated across four Euclidean distance matching thresholds ($0.5$ m, $1.0$ m, $2.0$ m, and $4.0$ m) on the PFSD validation set:
+
+| Model Architecture | Feature Variant | mAP | AP @ 0.5m | AP @ 1.0m | AP @ 2.0m | AP @ 4.0m |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
+| **PointPillars** | Baseline ($I$) | 45.70% | 21.77% | 33.96% | 53.39% | 73.70% |
+| **PointPillars** | Reflectivity Swap ($R$) | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% |
+| **PointPillars** | Feature Decoupling ($I, d$) | 43.10% | 20.35% | 30.88% | 49.70% | 71.49% |
+| **PointPillars** | Reflectivity Enhanced ($I, R$) | 0.45% | 0.00% | 0.00% | 0.00% | 1.79% |
+| **PointPillars** | Multi-Modal ($I, R, d$) | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% |
+| **CenterPoint** | Baseline ($I$) | 76.65% | 71.61% | 74.48% | 78.60% | 81.92% |
+| **CenterPoint** | Reflectivity Swap ($R$) | 39.03% | 34.94% | 36.67% | 40.54% | 43.98% |
+| **CenterPoint** | Feature Decoupling ($I, d$) | 53.42% | 42.00% | 47.81% | 56.44% | 67.43% |
+| **CenterPoint** | Reflectivity Enhanced ($I, R$) | 74.36% | 69.04% | 71.95% | 76.07% | 80.39% |
+| **CenterPoint** | **Multi-Modal ($I, R, d$)** | **82.76%** | 77.40% | 80.76% | 84.65% | 88.21% |
+| **VoxelNeXt** | Baseline ($I$) | 80.52% | 72.21% | 77.65% | 83.55% | 88.68% |
+| **VoxelNeXt** | Reflectivity Swap ($R$) | 31.93% | 20.16% | 24.63% | 33.64% | 49.29% |
+| **VoxelNeXt** | Feature Decoupling ($I, d$) | 79.85% | 71.48% | 76.93% | 82.86% | 88.12% |
+| **VoxelNeXt** | Reflectivity Enhanced ($I, R$) | 79.20% | 73.27% | 76.30% | 81.48% | 85.74% |
+| **VoxelNeXt** | Multi-Modal ($I, R, d$) | 78.35% | 72.28% | 75.50% | 80.66% | 84.95% |
+| **HMFN** | **Baseline ($I$)** | **86.35%** | **80.76%** | **84.44%** | **88.10%** | **92.08%** |
+| **HMFN** | Feature Decoupling ($I, d$) | 68.73% | 61.67% | 65.85% | 70.36% | 77.05% |
+| **HMFN** | Reflectivity Enhanced ($I, R$) | 75.40% | 70.23% | 73.41% | 76.65% | 81.15% |
+| **HMFN** | Multi-Modal ($I, R, d$) | 72.07% | 66.27% | 69.57% | 74.02% | 78.41% |
+| **HMFN** | Reflectivity Swap ($R$) | 72.90% | 62.79% | 68.11% | 75.57% | 85.11% |
+
+---
+
+### 2. Multi-Model 3D Pedestrian Tracking Performance
+
+Evaluated on PFSD validation sequences with the DeepSORT-lite Kalman filter tracker at optimal parameter settings:
+
+<p align="center">
+  <img src="docs/assets/final_benchmark_comparison.png" alt="Final Benchmark Comparison" width="90%"/>
+</p>
+
+| Model Architecture | Feature Variant | AMOTA ↑ | HOTA ↑ | IDF1 ↑ | False Positives (FP) ↓ |
+|:---|:---|:---:|:---:|:---:|:---:|
+| **CenterPoint** | **Baseline ($I$)** | **0.745** | 0.3973 | 0.3873 | 2,415 |
+| **CenterPoint** | Reflectivity Swap ($R$) | 0.000 | 0.0000 | 0.0000 | 0 |
+| **CenterPoint** | Feature Decoupling ($I, d$) | 0.727 | 0.3799 | 0.3651 | **540** |
+| **CenterPoint** | Reflectivity Enhanced ($I, R$) | 0.716 | 0.3737 | 0.3602 | 2,786 |
+| **CenterPoint** | **Multi-Modal ($I, R, d$)** | 0.681 | **0.4006** | **0.3912** | 682 |
+| **VoxelNeXt** | Baseline ($I$) | 0.699 | 0.3175 | 0.3090 | 3,557 |
+| **VoxelNeXt** | Reflectivity Swap ($R$) | 0.245 | 0.2013 | 0.1854 | 717 |
+| **VoxelNeXt** | Feature Decoupling ($I, d$) | 0.701 | 0.3204 | 0.3154 | 641 |
+| **VoxelNeXt** | Reflectivity Enhanced ($I, R$) | 0.703 | 0.3210 | 0.3167 | 3,675 |
+| **VoxelNeXt** | **Multi-Modal ($I, R, d$)** | **0.711** | **0.3322** | **0.3241** | **534** |
+| **HMFN** | Baseline ($I$) | 0.717 | 0.3659 | 0.3496 | 573 |
+| **HMFN** | Reflectivity Swap ($R$) | 0.565 | 0.3146 | 0.3244 | 631 |
+| **HMFN** | Feature Decoupling ($I, d$) | 0.657 | 0.3488 | 0.3407 | 3,544 |
+| **HMFN** | **Reflectivity Enhanced ($I, R$)** | **0.719** | 0.3706 | 0.3720 | 598 |
+| **HMFN** | **Multi-Modal ($I, R, d$)** | 0.697 | **0.3761** | **0.3727** | 616 |
+| **PointPillars** | Baseline ($I$) | 0.000 | 0.1002 | 0.0893 | 719 |
+| **PointPillars** | Reflectivity Swap ($R$) | 0.000 | 0.0777 | 0.0693 | 719 |
+| **PointPillars** | Feature Decoupling ($I, d$) | 0.000 | 0.1782 | 0.1519 | 719 |
+| **PointPillars** | Reflectivity Enhanced ($I, R$) | 0.000 | 0.0000 | 0.0000 | 719 |
+| **PointPillars** | Multi-Modal ($I, R, d$) | 0.000 | 0.0000 | 0.0000 | 719 |
+
+---
+
+## 🔬 Core Academic Discoveries
+
+### 1. The 2D Compression Failure (PointPillars)
+<p align="center">
+  <img src="docs/assets/2d_pillar_flattening_vs_3d_sparse_encoders.png" alt="2D Pillar Flattening vs 3D Sparse Encoders" width="85%"/>
+</p>
+
+Architectures relying on early vertical compression (collapsing the Z-axis into 2D pillars) completely collapse on dense 128-beam pedestrian crowds (**0.000 AMOTA** across all representations). Compressing the height dimension discards structural vertical geometry, merging street signs, poles, and foliage with pedestrian torsos in bird's-eye view (BEV) and provoking insurmountable False Positive explosions.
+
+### 2. The Reflectivity Paradox (Why $R = I \cdot d^2$ Fails in Tracking)
+Directly replacing raw Intensity with physical reflectivity ($R$) severely degrades tracking accuracy across all backbones (dropping HMFN from 0.717 to 0.565 AMOTA). The inverse-square scaling drastically amplifies distant retro-reflective background objects. Because the detector assigns these clutter objects confidence scores that overlap with genuine pedestrians, downstream tracking algorithms suffer severe trajectory fragmentation and ID switches.
+
+<p align="center">
+  <img src="docs/assets/detection_tracking_divergence.png" alt="Detection vs Tracking Divergence" width="80%"/>
+</p>
+
+### 3. Feature Decoupling Slashes False Positives
+Supplying intensity and range distance as independent channels $(I, d)$ allows the multi-layer perceptrons within the Voxel Feature Encoder (VFE) to natively learn range-conditioned calibrations. 
+- On **CenterPoint**, false positives dropped from **2,415 to 540** (-78%).
+- On **VoxelNeXt**, false positives dropped from **3,557 to 641** (-82%).
+
+### 4. Scene Purity vs. Trajectory Continuity Trade-off
+- **AMOTA** heavily penalizes false positives and favors conservative detections (CenterPoint Baseline reaches 0.745 AMOTA).
+- **HOTA & IDF1** peak under the **Multi-Modal ($I, R, d$)** variant across all volumetric backbones (CenterPoint secures benchmark-best **0.4006 HOTA** and **0.3912 IDF1**). Calibrated reflectivity acts as a persistent radiometric signature that enables the tracker to maintain target identity through dense occlusions.
+
+---
+
+## 🎯 Optimal Tracker Parameters (Reproducibility)
+
+The table records the exact distance gating threshold ($D$), confidence score filter ($F$), and reflectivity appearance penalty weight ($R$) identified via grid search:
+
+| Model Architecture | Best AMOTA Parameters | Best HOTA Parameters | Best IDF1 Parameters |
+|:---|:---|:---|:---|
+| **CenterPoint Baseline** | (D: 40.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) |
+| **CenterPoint Reflectivity Swap** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) |
+| **CenterPoint Feature Decoupling** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) |
+| **CenterPoint Reflectivity Enhanced** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) |
+| **CenterPoint Multi-Modal** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) |
+| **VoxelNeXt Baseline** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) |
+| **VoxelNeXt Reflectivity Swap** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.16x) | (D: 40.0m, F: 0.5, R: 0.16x) |
+| **VoxelNeXt Feature Decoupling** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) |
+| **VoxelNeXt Reflectivity Enhanced** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) |
+| **VoxelNeXt Multi-Modal** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) |
+| **HMFN Baseline** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) |
+| **HMFN Reflectivity Swap** | (D: 40.0m, F: 0.5, R: 0.22x) | (D: 40.0m, F: 0.5, R: 0.22x) | (D: 40.0m, F: 0.5, R: 0.22x) |
+| **HMFN Feature Decoupling** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) |
+| **HMFN Reflectivity Enhanced** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) |
+| **HMFN Multi-Modal** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) |
+| **PointPillars Baseline** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) |
+| **PointPillars Reflectivity Swap** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.5, R: 0.1x) |
+| **PointPillars Feature Decoupling** | (D: 30.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) |
+| **PointPillars Reflectivity Enhanced** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 30.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) |
+| **PointPillars Multi-Modal** | (D: 40.0m, F: 0.5, R: 0.0x) | (D: 40.0m, F: 0.6, R: 0.0x) | (D: 40.0m, F: 0.5, R: 0.0x) |
 
 ---
 
@@ -89,10 +205,10 @@ All models were trained for **160 epochs** on the PFSD 128-beam LiDAR dataset an
 │   ├── visualize_projection.py          # Point cloud to video feed projection
 │   └── generate_thesis_tables.py        # Summary table generation
 ├── docs/                                # Thesis figures, charts, and methodology notes
-│   ├── charts/                          # Publication figure generator scripts (.py) and PDFs
-│   ├── architecture/                    # System architecture diagrams and schedules
-│   ├── processAndFindings.md            # In-depth technical development log
-│   └── tracker_justification.md         # Academic justification of Kalman filtering vs. IoU
+│   ├── assets/                          # Embedded PNG figures and diagrams
+│   ├── charts/                          # Figure generator scripts (.py) and PDFs
+│   ├── architecture/                    # System architecture diagrams
+│   └── processAndFindings.md            # Technical development log
 ├── results/                             # Benchmark evaluation logs and metrics summaries
 │   ├── final_thesis_results_all.md      # Consolidated master metrics table
 │   └── ...                              # Per-model JSON metrics and evaluation plots
@@ -105,83 +221,38 @@ All models were trained for **160 epochs** on the PFSD 128-beam LiDAR dataset an
 
 ---
 
-## ⚙️ Installation & Environment Setup
+## ⚙️ Installation & Quickstart
 
-### Prerequisites
-- Linux OS (tested on Ubuntu 20.04/22.04)
-- NVIDIA GPU with CUDA 11.3+ or 12.x
-- Python 3.8 – 3.10
-
-### 1. Automated Setup
-Run the setup script:
+### 1. Setup Environment
 ```bash
+git clone https://github.com/Jeejeejeelis/People-Tracking-with-LiDAR-Using-Intensity-and-Reflectivity-Data.git
+cd People-Tracking-with-LiDAR-Using-Intensity-and-Reflectivity-Data
+
 chmod +x setup_env.sh
 ./setup_env.sh
 ```
 
-### 2. Manual Setup
-If setting up manually:
+### 2. Session Activation
+In every new shell session:
 ```bash
-# Create and activate virtual environment
-python3 -m venv venv
 source venv/bin/activate
-
-# Install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# Compile PFSD / OpenPCDet CUDA extensions
-cd PFSD
-python setup.py develop
-cd ..
-
-# Set PYTHONPATH
 export PYTHONPATH=$(pwd):$(pwd)/PFSD:$(pwd)/OpenPCDet:$PYTHONPATH
 ```
-
----
-
-## 📦 Dataset Preparation
-
-This project evaluates on the **Pedestrian-Focus Scene Dataset (PFSD)** in nuScenes format:
-
-1. Download the PFSD dataset following the official [PFSD repository](https://github.com/VSlabRobotics/PFSD).
-2. Organize your data directory as follows:
-   ```
-   data/pfsd/
-   ├── v1.0-mini/
-   │   ├── samples/
-   │   │   ├── LIDAR_TOP/
-   │   │   └── CAM_FRONT/
-   │   ├── sweeps/
-   │   ├── v1.0-mini/ (JSON metadata)
-   │   └── pfsd_infos_10sweeps_val.pkl
-   ```
-3. Generate metadata pickle files using OpenPCDet tools:
-   ```bash
-   python -m pcdet.datasets.nuscenes.nuscenes_dataset \
-       --func create_nuscenes_infos \
-       --cfg_file configs/pfsd_dataset_baseline.yaml
-   ```
 
 ---
 
 ## 🚀 Tracking Evaluation & Reproduction
 
-### 1. Evaluate a Model Checkpoint
-To evaluate 3D pedestrian tracking on PFSD using the DeepSORT-lite Kalman filter:
+### 1. Run 3D Multi-Object Tracking
 ```bash
-source venv/bin/activate
-export PYTHONPATH=$(pwd):$(pwd)/PFSD:$(pwd)/OpenPCDet:$PYTHONPATH
-
 python tools/evaluate_pfsd_tracking.py \
     --cfg_file configs/pfsd_hmfn_baseline.yaml \
     --ckpt weights/hmfn_baseline_160.pth \
-    --score_thresh 0.4
+    --score_thresh 0.5 \
+    --dist_thresh 40.0
 ```
 
 ### 2. Evaluate HOTA & Trajectory Continuity (IDF1)
-Run the dedicated metric modules to compute HOTA (DetA, AssA, LocA) and IDF1:
 ```bash
 # 1. Export ground truth trajectories
 python tools/export_nusc_tracking_gt.py
@@ -195,11 +266,11 @@ python tools/compute_pfsd_idf1.py --pred_dir results/hmfn_baseline_160/tracking_
 
 ---
 
-## 🎯 High-Speed Hyperparameter Tuning (Tracking Frontiers)
+## 🎯 High-Speed Hyperparameter Tuning
 
-To tune dynamic distance-dependent thresholds and reflectivity penalty weights without re-running heavy neural network inference:
+To run grid searches across millions of distance gates and confidence filters without repeating deep neural network inference:
 
-1. **Extract and cache unthresholded raw predictions**:
+1. **Cache unthresholded detections**:
    ```bash
    python tools/extract_raw_predictions.py \
        --cfg_file configs/pfsd_centerpoint_swap.yaml \
@@ -207,36 +278,34 @@ To tune dynamic distance-dependent thresholds and reflectivity penalty weights w
        --output_pkl results/cp_swap_raw.pkl
    ```
 
-2. **Run grid search across millions of combinations in seconds**:
+2. **Execute hyperparameter search**:
    ```bash
    python tools/tune_tracking_frontiers.py \
        --pkl results/cp_swap_raw.pkl \
-       --dist_range 15 35 \
+       --dist_range 15 45 \
        --far_penalty 0.1 0.7
    ```
 
 ---
 
-## 🖼️ Visualizations & Sensor Projection
+## 📖 Citation
 
-### Project 3D Predictions onto Camera Video
-```bash
-python tools/run_pfsd_visual_debug.py \
-    --cfg_file configs/pfsd_hmfn_baseline.yaml \
-    --ckpt weights/hmfn_baseline_160.pth \
-    --scene_name 0001
-```
+If you find this codebase or research useful, please cite the Master's Thesis:
 
-### Visualize Robust Reflectivity Normalization
-```bash
-python tools/visualize_normalization.py
+```bibtex
+@mastersthesis{pinomaa2026peopletracking,
+  author    = {Eelis Pinomaa},
+  title     = {People Tracking with LiDAR Using Intensity and Reflectivity Data},
+  school    = {Aalto University, School of Electrical Engineering},
+  year      = {2026},
+  address   = {Espoo, Finland}
+}
 ```
 
 ---
 
-## 📚 References & Acknowledgments
-
-- **OpenPCDet**: OpenPCDet Development Team. [https://github.com/open-mmlab/OpenPCDet](https://github.com/open-mmlab/OpenPCDet)
+## 📚 Acknowledgments
 - **PFSD Dataset**: *PFSD: A Multi-Modal Pedestrian-Focus Scene Dataset for Rich Tasks in Semi-Structured Environments* (VSLab Robotics, 2025). [https://github.com/VSlabRobotics/PFSD](https://github.com/VSlabRobotics/PFSD)
+- **OpenPCDet**: OpenPCDet Development Team. [https://github.com/open-mmlab/OpenPCDet](https://github.com/open-mmlab/OpenPCDet)
 - **NuScenes**: Caesar et al., *nuScenes: A multimodal dataset for autonomous driving*, CVPR 2020.
 - **TrackEval**: Luiten et al., *TrackEval: Multi-Object Tracking Evaluation Toolkit*, 2020.
