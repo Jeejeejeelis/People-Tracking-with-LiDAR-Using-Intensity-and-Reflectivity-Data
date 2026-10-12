@@ -1,0 +1,115 @@
+{
+  "label_metrics": {
+    "amota": {
+      "pedestrian": 0.0
+    },
+    "amotp": {
+      "pedestrian": 1.5046229576551797
+    },
+    "recall": {
+      "pedestrian": 0.6812810653662197
+    },
+    "motar": {
+      "pedestrian": 0.0
+    },
+    "gt": {
+      "pedestrian": 21326.0
+    },
+    "mota": {
+      "pedestrian": 0.0
+    },
+    "motp": {
+      "pedestrian": 0.9557742234413193
+    },
+    "mt": {
+      "pedestrian": 176.0
+    },
+    "ml": {
+      "pedestrian": 79.0
+    },
+    "faf": {
+      "pedestrian": 3583.7049742710124
+    },
+    "tp": {
+      "pedestrian": 11115.0
+    },
+    "fp": {
+      "pedestrian": 20893.0
+    },
+    "fn": {
+      "pedestrian": 6797.0
+    },
+    "ids": {
+      "pedestrian": 3414.0
+    },
+    "frag": {
+      "pedestrian": 931.0
+    },
+    "tid": {
+      "pedestrian": 2.362796833773087
+    },
+    "lgd": {
+      "pedestrian": 4.24934036939314
+    }
+  },
+  "eval_time": 134.66587948799133,
+  "cfg": {
+    "class_range": {
+      "car": 50,
+      "truck": 50,
+      "bus": 50,
+      "trailer": 50,
+      "pedestrian": 40,
+      "motorcycle": 40,
+      "bicycle": 40
+    },
+    "dist_fcn": "center_distance",
+    "dist_th_tp": 2.0,
+    "min_recall": 0.1,
+    "max_boxes_per_sample": 500,
+    "metric_worst": {
+      "amota": 0.0,
+      "amotp": 2.0,
+      "recall": 0.0,
+      "motar": 0.0,
+      "mota": 0.0,
+      "motp": 2.0,
+      "mt": 0.0,
+      "ml": -1.0,
+      "faf": 500,
+      "gt": -1,
+      "tp": 0.0,
+      "fp": -1.0,
+      "fn": -1.0,
+      "ids": -1.0,
+      "frag": -1.0,
+      "tid": 20,
+      "lgd": 20
+    },
+    "num_thresholds": 40
+  },
+  "amota": 0.0,
+  "amotp": 1.5046229576551797,
+  "recall": 0.6812810653662197,
+  "motar": 0.0,
+  "gt": 21326.0,
+  "mota": 0.0,
+  "motp": 0.9557742234413193,
+  "mt": 176.0,
+  "ml": 79.0,
+  "faf": 3583.7049742710124,
+  "tp": 11115.0,
+  "fp": 20893.0,
+  "fn": 6797.0,
+  "ids": 3414.0,
+  "frag": 931.0,
+  "tid": 2.362796833773087,
+  "lgd": 4.24934036939314,
+  "meta": {
+    "use_camera": false,
+    "use_lidar": true,
+    "use_radar": false,
+    "use_map": false,
+    "use_external_tracking": false
+  }
+}

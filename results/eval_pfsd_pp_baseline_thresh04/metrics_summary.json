@@ -1,0 +1,115 @@
+{
+  "label_metrics": {
+    "amota": {
+      "pedestrian": 0.03501030414121885
+    },
+    "amotp": {
+      "pedestrian": 1.644378971687291
+    },
+    "recall": {
+      "pedestrian": 0.18990903122948513
+    },
+    "motar": {
+      "pedestrian": 0.3127992339610597
+    },
+    "gt": {
+      "pedestrian": 21326.0
+    },
+    "mota": {
+      "pedestrian": 0.04595329644565316
+    },
+    "motp": {
+      "pedestrian": 1.000222085066195
+    },
+    "mt": {
+      "pedestrian": 0.0
+    },
+    "ml": {
+      "pedestrian": 314.0
+    },
+    "faf": {
+      "pedestrian": 369.2967409948542
+    },
+    "tp": {
+      "pedestrian": 3133.0
+    },
+    "fp": {
+      "pedestrian": 2153.0
+    },
+    "fn": {
+      "pedestrian": 17276.0
+    },
+    "ids": {
+      "pedestrian": 917.0
+    },
+    "frag": {
+      "pedestrian": 548.0
+    },
+    "tid": {
+      "pedestrian": 7.69140625
+    },
+    "lgd": {
+      "pedestrian": 14.43359375
+    }
+  },
+  "eval_time": 94.41236424446106,
+  "cfg": {
+    "class_range": {
+      "car": 50,
+      "truck": 50,
+      "bus": 50,
+      "trailer": 50,
+      "pedestrian": 40,
+      "motorcycle": 40,
+      "bicycle": 40
+    },
+    "dist_fcn": "center_distance",
+    "dist_th_tp": 2.0,
+    "min_recall": 0.1,
+    "max_boxes_per_sample": 500,
+    "metric_worst": {
+      "amota": 0.0,
+      "amotp": 2.0,
+      "recall": 0.0,
+      "motar": 0.0,
+      "mota": 0.0,
+      "motp": 2.0,
+      "mt": 0.0,
+      "ml": -1.0,
+      "faf": 500,
+      "gt": -1,
+      "tp": 0.0,
+      "fp": -1.0,
+      "fn": -1.0,
+      "ids": -1.0,
+      "frag": -1.0,
+      "tid": 20,
+      "lgd": 20
+    },
+    "num_thresholds": 40
+  },
+  "amota": 0.03501030414121885,
+  "amotp": 1.644378971687291,
+  "recall": 0.18990903122948513,
+  "motar": 0.3127992339610597,
+  "gt": 21326.0,
+  "mota": 0.04595329644565316,
+  "motp": 1.000222085066195,
+  "mt": 0.0,
+  "ml": 314.0,
+  "faf": 369.2967409948542,
+  "tp": 3133.0,
+  "fp": 2153.0,
+  "fn": 17276.0,
+  "ids": 917.0,
+  "frag": 548.0,
+  "tid": 7.69140625,
+  "lgd": 14.43359375,
+  "meta": {
+    "use_camera": false,
+    "use_lidar": true,
+    "use_radar": false,
+    "use_map": false,
+    "use_external_tracking": false
+  }
+}

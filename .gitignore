@@ -1,0 +1,69 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C extensions / build artifacts
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env
+
+# Large datasets & raw sensor data
+data/
+archive/
+*.bin
+*.pcd
+*.las
+*.laz
+
+# Model weights & large binaries (>100MB)
+weights/*.pth
+*.pth
+*.pt
+*.onnx
+*.ckpt
+
+# Output images, intermediate visualizations, and video dumps
+*.png
+*.jpg
+*.jpeg
+*.mp4
+visualizations/
+test_vis/
+output/
+
+# Temporary logs, raw dumps, cached evaluation pickles
+*.log
+*.pkl
+*_metrics.txt
+results/*/tracking_results.json
+results/ablation_tuning/
+results/ablation_test/
+results/ablation_baseline/
+results/raw_detections_*/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo

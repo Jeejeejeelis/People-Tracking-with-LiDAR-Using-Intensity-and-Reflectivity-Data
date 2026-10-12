@@ -1,0 +1,225 @@
+Loading NuScenes dataset
+Total samples for NuScenes dataset: 583
+2026-08-23 20:41:05,594   INFO  ==> Loading parameters from checkpoint ../../weights/hmfn_baseline_160.pth to GPU
+2026-08-23 20:41:05,704   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2026-08-23 20:41:05,753   INFO  ==> Done (loaded 429/429)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:41: UserWarning: scatter_reduce() is in beta and the API may change at any time. (Triggered internally at  ../aten/src/ATen/native/TensorAdvancedIndexing.cpp:1550.)
+  x_max = torch.zeros((num_unq, x.shape[1]), dtype=x.dtype, device=x.device).scatter_reduce(
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:236: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  pillar_coords = torch.stack((unq_coords // self.scale_xy,
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/backbones_3d/vfe/dynamic_pillar_vfe.py:237: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  (unq_coords % self.scale_xy) // self.scale_y,
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/model_utils/centernet_utils.py:161: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  topk_ys = (topk_inds // width).float()
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/model_utils/centernet_utils.py:165: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  topk_classes = (topk_ind // K).int()
+Loading OpenPCDet model from ../../weights/hmfn_baseline_160.pth...
+Model loaded successfully and moved to GPU.
+Processing 583 samples...
+Frame 0/583...
+Frame 50/583...
+Frame 100/583...
+Frame 150/583...
+Frame 200/583...
+Frame 250/583...
+Frame 300/583...
+Frame 350/583...
+Frame 400/583...
+Frame 450/583...
+Frame 500/583...
+Frame 550/583...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.4 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Running tracker and converting to nuScenes format...
+Results saved to ../../results/hmfn_baseline_160/tracking_eval/tracking_results.json
+Calculating metrics...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.4 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Initializing nuScenes tracking evaluation
+Loaded results from ../../results/hmfn_baseline_160/tracking_eval/tracking_results.json. Found detections for 583 samples.
+Loading annotations for mini_val split from nuScenes version: v1.0-mini
+  0%|          | 0/583 [00:00<?, ?it/s] 16%|█▌        | 94/583 [00:00<00:00, 933.10it/s] 32%|███▏      | 188/583 [00:00<00:00, 884.77it/s] 48%|████▊     | 277/583 [00:00<00:00, 838.04it/s] 62%|██████▏   | 362/583 [00:00<00:00, 752.80it/s] 75%|███████▌  | 439/583 [00:00<00:00, 617.22it/s] 87%|████████▋ | 505/583 [00:00<00:00, 593.13it/s]100%|██████████| 583/583 [00:00<00:00, 709.24it/s]
+Loaded ground truth annotations for 583 samples.
+Filtering tracks
+=> Original number of boxes: 25528
+=> After distance based filtering: 25528
+=> After LIDAR points based filtering: 25528
+=> After bike rack filtering: 25528
+Filtering ground truth tracks
+=> Original number of boxes: 19601
+=> After distance based filtering: 19601
+=> After LIDAR points based filtering: 19558
+=> After bike rack filtering: 19558
+Accumulating metric data...
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:01<00:07,  1.32s/it] 29%|██▊       | 2/7 [00:01<00:03,  1.48it/s] 43%|████▎     | 3/7 [00:01<00:02,  1.80it/s] 57%|█████▋    | 4/7 [00:02<00:01,  1.52it/s] 71%|███████▏  | 5/7 [00:02<00:00,  2.02it/s] 86%|████████▌ | 6/7 [00:04<00:00,  1.36it/s]100%|██████████| 7/7 [00:05<00:00,  1.01it/s]                                             Computed thresholds
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.50it/s] 43%|████▎     | 3/7 [00:00<00:00, 13.89it/s] 71%|███████▏  | 5/7 [00:00<00:00, 14.34it/s]100%|██████████| 7/7 [00:00<00:00, 10.91it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.4549	0.678	0.473	0.866	583	21326	17561	2858	907	24115	17561	5647	907
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.67it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.18it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.39it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.4887	0.720	0.464	0.846	583	21326	17235	3294	797	22865	17235	4833	797
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.74it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.27it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.59it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5122	0.750	0.471	0.824	583	21326	16836	3756	734	21784	16836	4214	734
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.80it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.51it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.85it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5341	0.781	0.465	0.801	583	21326	16438	4243	645	20680	16438	3597	645
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.68it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.59it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.79it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5494	0.812	0.462	0.782	583	21326	16094	4641	591	19705	16094	3020	591
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.74it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.64it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.72it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5601	0.840	0.466	0.766	583	21326	15772	4981	573	18874	15772	2529	573
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.72it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.53it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.97it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5698	0.855	0.466	0.743	583	21326	15316	5481	529	18066	15316	2221	529
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.67it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.88it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.43it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5785	0.870	0.452	0.718	583	21326	14851	6010	465	17244	14851	1928	465
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.72it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.00it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.55it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5857	0.875	0.450	0.692	583	21326	14323	6577	426	16539	14323	1790	426
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.97it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.12it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.75it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5942	0.888	0.423	0.667	583	21326	13837	7107	382	15766	13837	1547	382
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.94it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.37it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.73it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.5986	0.900	0.416	0.643	583	21326	13373	7605	348	15063	13373	1342	348
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.93it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.79it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.20it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6040	0.903	0.408	0.617	583	21326	12852	8171	303	14400	12852	1245	303
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.94it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.79it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.62it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6108	0.910	0.390	0.589	583	21326	12307	8757	262	13679	12307	1110	262
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.08it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.00it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.94it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6171	0.918	0.385	0.562	583	21326	11759	9332	235	12956	11759	962	235
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.97it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.05it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.07it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6218	0.924	0.374	0.539	583	21326	11289	9836	201	12348	11289	858	201
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.06it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.18it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.34it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6281	0.924	0.365	0.509	583	21326	10684	10471	171	11668	10684	813	171
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.90it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.26it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.48it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6338	0.924	0.346	0.485	583	21326	10197	10987	142	11111	10197	772	142
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.19it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.47it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.63it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6410	0.931	0.340	0.460	583	21326	9690	11507	129	10486	9690	667	129
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.28it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.65it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.85it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6447	0.934	0.330	0.435	583	21326	9166	12044	116	9891	9166	609	116
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.25it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.56it/s] 86%|████████▌ | 6/7 [00:00<00:00, 17.01it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6492	0.935	0.327	0.410	583	21326	8644	12581	101	9306	8644	561	101
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.01it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.81it/s]100%|██████████| 7/7 [00:00<00:00, 15.76it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6582	0.936	0.327	0.384	583	21326	8106	13137	83	8711	8106	522	83
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.27it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.00it/s]100%|██████████| 7/7 [00:00<00:00, 15.98it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6614	0.935	0.338	0.362	583	21326	7640	13607	79	8214	7640	495	79
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.20it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.01it/s]100%|██████████| 7/7 [00:00<00:00, 16.24it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6643	0.934	0.325	0.337	583	21326	7112	14143	71	7650	7112	467	71
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.38it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.32it/s]100%|██████████| 7/7 [00:00<00:00, 16.61it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6672	0.932	0.320	0.312	583	21326	6581	14682	63	7090	6581	446	63
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.69it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.43it/s]100%|██████████| 7/7 [00:00<00:00, 16.93it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6712	0.931	0.330	0.287	583	21326	6048	15215	63	6528	6048	417	63
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.58it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.89it/s]100%|██████████| 7/7 [00:00<00:00, 17.44it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6757	0.933	0.310	0.261	583	21326	5517	15753	56	5940	5517	367	56
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.67it/s] 57%|█████▋    | 4/7 [00:00<00:00, 17.06it/s]100%|██████████| 7/7 [00:00<00:00, 17.58it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6797	0.950	0.321	0.238	583	21326	5031	16246	49	5332	5031	252	49
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.04it/s] 57%|█████▋    | 4/7 [00:00<00:00, 17.75it/s]100%|██████████| 7/7 [00:00<00:00, 18.60it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6862	0.966	0.283	0.213	583	21326	4508	16779	39	4700	4508	153	39
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.11it/s] 57%|█████▋    | 4/7 [00:00<00:00, 18.70it/s]100%|██████████| 7/7 [00:00<00:00, 19.40it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6889	0.968	0.294	0.190	583	21326	4016	17275	35	4179	4016	128	35
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.30it/s] 57%|█████▋    | 4/7 [00:00<00:00, 19.13it/s]100%|██████████| 7/7 [00:00<00:00, 19.63it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6923	0.970	0.293	0.167	583	21326	3522	17772	32	3658	3522	104	32
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.56it/s] 57%|█████▋    | 4/7 [00:00<00:00, 20.07it/s]100%|██████████| 7/7 [00:00<00:00, 20.49it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.6992	0.978	0.284	0.140	583	21326	2955	18340	31	3052	2955	66	31
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.55it/s] 57%|█████▋    | 4/7 [00:00<00:00, 19.78it/s]100%|██████████| 7/7 [00:00<00:00, 20.44it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.7041	0.982	0.282	0.117	583	21326	2454	18841	31	2528	2454	43	31
+
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:01<00:07,  1.30s/it] 29%|██▊       | 2/7 [00:01<00:03,  1.50it/s] 43%|████▎     | 3/7 [00:01<00:02,  1.83it/s] 57%|█████▋    | 4/7 [00:02<00:01,  1.50it/s] 71%|███████▏  | 5/7 [00:02<00:01,  2.00it/s] 86%|████████▌ | 6/7 [00:04<00:00,  1.35it/s]100%|██████████| 7/7 [00:05<00:00,  1.00it/s]                                             DEBUG thresholds: [nan, nan, nan, nan, nan, nan, nan, nan, 0.45489107232807535, 0.4886917509138584, 0.512218627664778, 0.534076726436615, 0.5494242731643759, 0.560107409954071, 0.5697893500328064, 0.578470508257548, 0.5856978671495304, 0.5942068137204081, 0.5985929995775223, 0.6039541073334522, 0.610820066284489, 0.6170735955238342, 0.6217758635411391, 0.6280816860496998, 0.6338440704345704, 0.6409806588600422, 0.6447146236896515, 0.6491713729398004, 0.6582179215065268, 0.6614361524581909, 0.6642914031233106, 0.6671800271848615, 0.6712026766368321, 0.6756510734558105, 0.6797179388999939, 0.6862127390401117, 0.6889247162300244, 0.6923021044529659, 0.6991880200125954, 0.7041277342372471], recalls: [1.0, 0.976923076923, 0.953846153846, 0.930769230769, 0.907692307692, 0.884615384615, 0.861538461538, 0.838461538462, 0.815384615385, 0.792307692308, 0.769230769231, 0.746153846154, 0.723076923077, 0.7, 0.676923076923, 0.653846153846, 0.630769230769, 0.607692307692, 0.584615384615, 0.561538461538, 0.538461538462, 0.515384615385, 0.492307692308, 0.469230769231, 0.446153846154, 0.423076923077, 0.4, 0.376923076923, 0.353846153846, 0.330769230769, 0.307692307692, 0.284615384615, 0.261538461538, 0.238461538462, 0.215384615385, 0.192307692308, 0.169230769231, 0.146153846154, 0.123076923077, 0.1]
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.59it/s] 43%|████▎     | 3/7 [00:00<00:00, 13.73it/s] 71%|███████▏  | 5/7 [00:00<00:00, 14.31it/s]100%|██████████| 7/7 [00:00<00:00, 11.07it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.55it/s] 43%|████▎     | 3/7 [00:00<00:00, 13.71it/s] 71%|███████▏  | 5/7 [00:00<00:00, 14.44it/s]100%|██████████| 7/7 [00:00<00:00, 11.25it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.65it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.16it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.38it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.66it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.29it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.50it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.55it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.21it/s] 86%|████████▌ | 6/7 [00:00<00:00, 13.66it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.74it/s] 43%|████▎     | 3/7 [00:00<00:00, 14.15it/s] 71%|███████▏  | 5/7 [00:00<00:00, 14.87it/s]100%|██████████| 7/7 [00:00<00:00, 11.78it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.79it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.59it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.08it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.73it/s] 57%|█████▋    | 4/7 [00:00<00:00, 13.92it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.40it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.84it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.01it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.56it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.90it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.20it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.79it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.79it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.01it/s] 86%|████████▌ | 6/7 [00:00<00:00, 14.79it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.69it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.34it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.17it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.02it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.53it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.45it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.04it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.79it/s] 86%|████████▌ | 6/7 [00:00<00:00, 15.57it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.96it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.13it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.09it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.08it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.09it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.27it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.07it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.19it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.28it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.07it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.22it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.30it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  7.88it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.53it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.91it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.12it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.50it/s] 86%|████████▌ | 6/7 [00:00<00:00, 16.99it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.33it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.97it/s]100%|██████████| 7/7 [00:00<00:00, 15.96it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.17it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.98it/s]100%|██████████| 7/7 [00:00<00:00, 16.14it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.06it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.07it/s]100%|██████████| 7/7 [00:00<00:00, 16.27it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.56it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.33it/s]100%|██████████| 7/7 [00:00<00:00, 16.30it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.66it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.50it/s]100%|██████████| 7/7 [00:00<00:00, 17.02it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.27it/s] 57%|█████▋    | 4/7 [00:00<00:00, 16.64it/s]100%|██████████| 7/7 [00:00<00:00, 17.10it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.82it/s] 57%|█████▋    | 4/7 [00:00<00:00, 17.35it/s]100%|██████████| 7/7 [00:00<00:00, 17.55it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  8.96it/s] 57%|█████▋    | 4/7 [00:00<00:00, 17.60it/s]100%|██████████| 7/7 [00:00<00:00, 18.50it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.11it/s] 57%|█████▋    | 4/7 [00:00<00:00, 18.46it/s]100%|██████████| 7/7 [00:00<00:00, 19.08it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.43it/s] 57%|█████▋    | 4/7 [00:00<00:00, 19.17it/s]100%|██████████| 7/7 [00:00<00:00, 19.59it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.39it/s] 57%|█████▋    | 4/7 [00:00<00:00, 19.71it/s]100%|██████████| 7/7 [00:00<00:00, 20.22it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:00,  9.75it/s] 57%|█████▋    | 4/7 [00:00<00:00, 20.36it/s]100%|██████████| 7/7 [00:00<00:00, 20.30it/s]                                             Calculating metrics...
+Saving metrics to: ../../results/hmfn_baseline_160/tracking_eval
+
+### Final results ###
+
+Per-class results:
+		AMOTA	AMOTP	RECALL	MOTAR	GT	MOTA	MOTP	MT	ML	FAF	TP	FP	FN	IDS	FRAG	TID	LGD
+pedestr 	0.717	0.700	0.766	0.840	21326	0.621	0.466	224	86	433.8	15772	2529	4981	573	336	2.20	3.76
+
+Aggregated results:
+AMOTA	0.717
+AMOTP	0.700
+RECALL	0.766
+MOTAR	0.840
+GT	21326
+MOTA	0.621
+MOTP	0.466
+MT	224
+ML	86
+FAF	433.8
+TP	15772
+FP	2529
+FN	4981
+IDS	573
+FRAG	336
+TID	2.20
+LGD	3.76
+Eval time: 193.2s
+
+Rendering curves
+
+--- Evaluation Summary ---
+{'label_metrics': {'amota': {'pedestrian': 0.7172176296002777}, 'amotp': {'pedestrian': 0.6995399408483929}, 'recall': {'pedestrian': 0.7664353371471443}, 'motar': {'pedestrian': 0.839652548820695}, 'gt': {'pedestrian': 21326.0}, 'mota': {'pedestrian': 0.6209790865610054}, 'motp': {'pedestrian': 0.46631722118046975}, 'mt': {'pedestrian': 224.0}, 'ml': {'pedestrian': 86.0}, 'faf': {'pedestrian': 433.79073756432246}, 'tp': {'pedestrian': 15772.0}, 'fp': {'pedestrian': 2529.0}, 'fn': {'pedestrian': 4981.0}, 'ids': {'pedestrian': 573.0}, 'frag': {'pedestrian': 336.0}, 'tid': {'pedestrian': 2.1955922865013773}, 'lgd': {'pedestrian': 3.756198347107438}}, 'eval_time': 193.1641936302185, 'cfg': {'class_range': {'car': 50, 'truck': 50, 'bus': 50, 'trailer': 50, 'pedestrian': 40, 'motorcycle': 40, 'bicycle': 40}, 'dist_fcn': 'center_distance', 'dist_th_tp': 2.0, 'min_recall': 0.1, 'max_boxes_per_sample': 500, 'metric_worst': {'amota': 0.0, 'amotp': 2.0, 'recall': 0.0, 'motar': 0.0, 'mota': 0.0, 'motp': 2.0, 'mt': 0.0, 'ml': -1.0, 'faf': 500, 'gt': -1, 'tp': 0.0, 'fp': -1.0, 'fn': -1.0, 'ids': -1.0, 'frag': -1.0, 'tid': 20, 'lgd': 20}, 'num_thresholds': 40}, 'amota': 0.7172176296002777, 'amotp': 0.6995399408483929, 'recall': 0.7664353371471443, 'motar': 0.839652548820695, 'gt': 21326.0, 'mota': 0.6209790865610054, 'motp': 0.46631722118046975, 'mt': 224.0, 'ml': 86.0, 'faf': 433.79073756432246, 'tp': 15772.0, 'fp': 2529.0, 'fn': 4981.0, 'ids': 573.0, 'frag': 336.0, 'tid': 2.1955922865013773, 'lgd': 3.756198347107438, 'meta': {'use_camera': False, 'use_lidar': True, 'use_radar': False, 'use_map': False, 'use_external_tracking': False}}

@@ -1,0 +1,26 @@
+# Core
+numpy==1.26.4
+opencv-python
+matplotlib
+scikit-learn
+scipy
+pandas
+
+# Visualization & Utils
+open3d==0.19.0
+tqdm
+easydict
+pyyaml
+pyquaternion
+tensorboardX
+
+# OpenPCDet / PFSD Dependencies
+nuscenes-devkit>=1.0.5
+SharedArray
+numba
+llvmlite
+scikit-image
+motmetrics
+
+# Spconv (Essential for PointPillars/CenterPoint with CUDA 12.x on Triton)
+spconv-cu124

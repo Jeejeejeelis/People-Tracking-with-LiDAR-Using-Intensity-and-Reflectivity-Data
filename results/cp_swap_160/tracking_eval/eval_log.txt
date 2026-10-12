@@ -1,0 +1,358 @@
+Loading NuScenes dataset
+Total samples for NuScenes dataset: 583
+2026-08-23 20:01:21,020   INFO  ==> Loading parameters from checkpoint ../../weights/pfsd_centerpoint_swap_160.pth to GPU
+2026-08-23 20:01:21,067   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.0.weight: torch.Size([16, 3, 3, 3, 5])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.1.weight: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.1.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.1.running_mean: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.1.running_var: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv_input.1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.conv1.weight: torch.Size([16, 3, 3, 3, 16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.conv1.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn1.weight: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn1.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn1.running_mean: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn1.running_var: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.conv2.weight: torch.Size([16, 3, 3, 3, 16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.conv2.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn2.weight: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn2.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn2.running_mean: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn2.running_var: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.0.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.1.conv1.weight: torch.Size([16, 3, 3, 3, 16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.1.conv1.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.1.bn1.weight: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.1.bn1.bias: torch.Size([16])
+2026-08-23 20:01:21,097   INFO  Not updated weight backbone_3d.conv1.1.bn1.running_mean: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn1.running_var: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.conv2.weight: torch.Size([16, 3, 3, 3, 16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.conv2.bias: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn2.weight: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn2.bias: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn2.running_mean: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn2.running_var: torch.Size([16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv1.1.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.0.weight: torch.Size([32, 3, 3, 3, 16])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.1.weight: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.1.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.1.running_mean: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.1.running_var: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.0.1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.conv1.weight: torch.Size([32, 3, 3, 3, 32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.conv1.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn1.weight: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn1.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn1.running_mean: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn1.running_var: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.conv2.weight: torch.Size([32, 3, 3, 3, 32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.conv2.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn2.weight: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn2.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn2.running_mean: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn2.running_var: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.1.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.conv1.weight: torch.Size([32, 3, 3, 3, 32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.conv1.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn1.weight: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn1.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn1.running_mean: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn1.running_var: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.conv2.weight: torch.Size([32, 3, 3, 3, 32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.conv2.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn2.weight: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn2.bias: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn2.running_mean: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn2.running_var: torch.Size([32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv2.2.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv3.0.0.weight: torch.Size([64, 3, 3, 3, 32])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv3.0.1.weight: torch.Size([64])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv3.0.1.bias: torch.Size([64])
+2026-08-23 20:01:21,098   INFO  Not updated weight backbone_3d.conv3.0.1.running_mean: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.0.1.running_var: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.0.1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.conv1.weight: torch.Size([64, 3, 3, 3, 64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.conv1.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn1.weight: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn1.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn1.running_mean: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn1.running_var: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.conv2.weight: torch.Size([64, 3, 3, 3, 64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.conv2.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn2.weight: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn2.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn2.running_mean: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn2.running_var: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.1.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.conv1.weight: torch.Size([64, 3, 3, 3, 64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.conv1.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn1.weight: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn1.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn1.running_mean: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn1.running_var: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.conv2.weight: torch.Size([64, 3, 3, 3, 64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.conv2.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn2.weight: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn2.bias: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn2.running_mean: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn2.running_var: torch.Size([64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv3.2.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.0.weight: torch.Size([128, 3, 3, 3, 64])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.1.weight: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.1.bias: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.1.running_mean: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.1.running_var: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.0.1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.conv1.weight: torch.Size([128, 3, 3, 3, 128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.conv1.bias: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn1.weight: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn1.bias: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn1.running_mean: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn1.running_var: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.conv2.weight: torch.Size([128, 3, 3, 3, 128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.conv2.bias: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn2.weight: torch.Size([128])
+2026-08-23 20:01:21,099   INFO  Not updated weight backbone_3d.conv4.1.bn2.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.1.bn2.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.1.bn2.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.1.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.conv1.weight: torch.Size([128, 3, 3, 3, 128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.conv1.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn1.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn1.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn1.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn1.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.conv2.weight: torch.Size([128, 3, 3, 3, 128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.conv2.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn2.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn2.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn2.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn2.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv4.2.bn2.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.0.weight: torch.Size([128, 3, 1, 1, 128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.1.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.1.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.1.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.1.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_3d.conv_out.1.num_batches_tracked: torch.Size([])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.1.weight: torch.Size([128, 512, 3, 3])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.2.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.2.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.2.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.2.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.4.weight: torch.Size([128, 128, 3, 3])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.5.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.5.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.5.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.5.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.7.weight: torch.Size([128, 128, 3, 3])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.8.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.8.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.8.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.8.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.10.weight: torch.Size([128, 128, 3, 3])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.11.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.11.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.11.running_mean: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.11.running_var: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.13.weight: torch.Size([128, 128, 3, 3])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.14.weight: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.14.bias: torch.Size([128])
+2026-08-23 20:01:21,100   INFO  Not updated weight backbone_2d.blocks.0.14.running_mean: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.14.running_var: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.16.weight: torch.Size([128, 128, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.17.weight: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.17.bias: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.17.running_mean: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.0.17.running_var: torch.Size([128])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.1.weight: torch.Size([256, 128, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.2.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.2.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.2.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.2.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.4.weight: torch.Size([256, 256, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.5.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.5.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.5.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.5.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.7.weight: torch.Size([256, 256, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.8.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.8.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.8.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.8.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.10.weight: torch.Size([256, 256, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.11.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.11.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.11.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.11.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.13.weight: torch.Size([256, 256, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.14.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.14.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.14.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.14.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.16.weight: torch.Size([256, 256, 3, 3])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.17.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.17.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.17.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.blocks.1.17.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.0.0.weight: torch.Size([128, 256, 1, 1])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.0.1.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.0.1.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.0.1.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.0.1.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.1.0.weight: torch.Size([256, 256, 2, 2])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.1.1.weight: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.1.1.bias: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.1.1.running_mean: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight backbone_2d.deblocks.1.1.running_var: torch.Size([256])
+2026-08-23 20:01:21,101   INFO  Not updated weight dense_head.shared_conv.0.weight: torch.Size([64, 512, 3, 3])
+2026-08-23 20:01:21,102   INFO  ==> Done (loaded 345/558)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/model_utils/centernet_utils.py:161: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  topk_ys = (topk_inds // width).float()
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/PFSD/pcdet/models/model_utils/centernet_utils.py:165: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the 'trunc' function NOT 'floor'). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode='trunc'), or for actual floor division, use torch.div(a, b, rounding_mode='floor').
+  topk_classes = (topk_ind // K).int()
+Loading OpenPCDet model from ../../weights/pfsd_centerpoint_swap_160.pth...
+Model loaded successfully and moved to GPU.
+Processing 583 samples...
+Frame 0/583...
+Frame 50/583...
+Frame 100/583...
+Frame 150/583...
+Frame 200/583...
+Frame 250/583...
+Frame 300/583...
+Frame 350/583...
+Frame 400/583...
+Frame 450/583...
+Frame 500/583...
+Frame 550/583...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.4 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Running tracker and converting to nuScenes format...
+Results saved to ../../results/cp_swap_160/tracking_eval/tracking_results.json
+Calculating metrics...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.6 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Initializing nuScenes tracking evaluation
+Loaded results from ../../results/cp_swap_160/tracking_eval/tracking_results.json. Found detections for 583 samples.
+Loading annotations for mini_val split from nuScenes version: v1.0-mini
+  0%|          | 0/583 [00:00<?, ?it/s] 17%|█▋        | 99/583 [00:00<00:00, 989.67it/s] 34%|███▍      | 198/583 [00:00<00:00, 955.89it/s] 50%|█████     | 294/583 [00:00<00:00, 868.74it/s] 66%|██████▌   | 382/583 [00:00<00:00, 787.21it/s] 79%|███████▉  | 462/583 [00:00<00:00, 640.22it/s] 95%|█████████▍| 552/583 [00:00<00:00, 708.88it/s]100%|██████████| 583/583 [00:00<00:00, 766.44it/s]
+Loaded ground truth annotations for 583 samples.
+Filtering tracks
+Filtering ground truth tracks
+=> Original number of boxes: 19601
+=> After distance based filtering: 19601
+=> After LIDAR points based filtering: 19558
+=> After bike rack filtering: 19558
+Accumulating metric data...
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:01,  4.24it/s] 29%|██▊       | 2/7 [00:00<00:00,  5.96it/s] 43%|████▎     | 3/7 [00:00<00:00,  7.25it/s] 57%|█████▋    | 4/7 [00:01<00:00,  3.20it/s] 71%|███████▏  | 5/7 [00:01<00:00,  3.06it/s] 86%|████████▌ | 6/7 [00:02<00:00,  2.20it/s]100%|██████████| 7/7 [00:02<00:00,  2.26it/s]                                             Computed thresholds
+
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:01,  4.31it/s] 29%|██▊       | 2/7 [00:00<00:00,  5.91it/s] 43%|████▎     | 3/7 [00:00<00:00,  7.17it/s] 57%|█████▋    | 4/7 [00:01<00:00,  3.23it/s] 71%|███████▏  | 5/7 [00:01<00:00,  3.07it/s] 86%|████████▌ | 6/7 [00:02<00:00,  2.21it/s]100%|██████████| 7/7 [00:02<00:00,  2.28it/s]                                             /home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/nuscenes/eval/tracking/render.py:101: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  ax.legend(loc='upper right', borderaxespad=0)
+DEBUG thresholds: [nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan], recalls: [nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan]
+Calculating metrics...
+Saving metrics to: ../../results/cp_swap_160/tracking_eval
+
+### Final results ###
+
+Per-class results:
+		AMOTA	AMOTP	RECALL	MOTAR	GT	MOTA	MOTP	MT	ML	FAF	TP	FP	FN	IDS	FRAG	TID	LGD
+pedestr 	0.000	2.000	0.000	0.000	21326	0.000	2.000	0	439	500.0	0	nan	21326	nan	nan	20.00	20.00
+
+Aggregated results:
+AMOTA	0.000
+AMOTP	2.000
+RECALL	0.000
+MOTAR	0.000
+GT	21326
+MOTA	0.000
+MOTP	2.000
+MT	0
+ML	439
+FAF	500.0
+TP	0
+FP	0
+FN	21326
+IDS	0
+FRAG	0
+TID	20.00
+LGD	20.00
+Eval time: 5.3s
+
+Rendering curves
+
+--- Evaluation Summary ---
+{'label_metrics': {'amota': {'pedestrian': 0.0}, 'amotp': {'pedestrian': 2.0}, 'recall': {'pedestrian': 0.0}, 'motar': {'pedestrian': 0.0}, 'gt': {'pedestrian': 21326.0}, 'mota': {'pedestrian': 0.0}, 'motp': {'pedestrian': 2.0}, 'mt': {'pedestrian': 0.0}, 'ml': {'pedestrian': 439.0}, 'faf': {'pedestrian': 500.0}, 'tp': {'pedestrian': 0.0}, 'fp': {'pedestrian': nan}, 'fn': {'pedestrian': 21326.0}, 'ids': {'pedestrian': nan}, 'frag': {'pedestrian': nan}, 'tid': {'pedestrian': 20.0}, 'lgd': {'pedestrian': 20.0}}, 'eval_time': 5.252450942993164, 'cfg': {'class_range': {'car': 50, 'truck': 50, 'bus': 50, 'trailer': 50, 'pedestrian': 40, 'motorcycle': 40, 'bicycle': 40}, 'dist_fcn': 'center_distance', 'dist_th_tp': 2.0, 'min_recall': 0.1, 'max_boxes_per_sample': 500, 'metric_worst': {'amota': 0.0, 'amotp': 2.0, 'recall': 0.0, 'motar': 0.0, 'mota': 0.0, 'motp': 2.0, 'mt': 0.0, 'ml': -1.0, 'faf': 500, 'gt': -1, 'tp': 0.0, 'fp': -1.0, 'fn': -1.0, 'ids': -1.0, 'frag': -1.0, 'tid': 20, 'lgd': 20}, 'num_thresholds': 40}, 'amota': 0.0, 'amotp': 2.0, 'recall': 0.0, 'motar': 0.0, 'gt': 21326.0, 'mota': 0.0, 'motp': 2.0, 'mt': 0.0, 'ml': 439.0, 'faf': 500.0, 'tp': 0.0, 'fp': 0.0, 'fn': 21326.0, 'ids': 0.0, 'frag': 0.0, 'tid': 20.0, 'lgd': 20.0, 'meta': {'use_camera': False, 'use_lidar': True, 'use_radar': False, 'use_map': False, 'use_external_tracking': False}}

@@ -1,0 +1,127 @@
+Loading NuScenes dataset
+Total samples for NuScenes dataset: 583
+/home/eelis/Desktop/Diplomityö/peopleTrackingWithLidar/venv/lib/python3.10/site-packages/torch/functional.py:478: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2894.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+2026-08-23 19:42:02,939   INFO  ==> Loading parameters from checkpoint ../../weights/pfsd_pp_multihead_swap_160.pth to GPU
+2026-08-23 19:42:02,995   INFO  ==> Checkpoint trained from version: pcdet+0.6.0+0000000
+2026-08-23 19:42:03,016   INFO  ==> Done (loaded 421/421)
+Loading OpenPCDet model from ../../weights/pfsd_pp_multihead_swap_160.pth...
+Model loaded successfully and moved to GPU.
+Processing 583 samples...
+Frame 0/583...
+Frame 50/583...
+Frame 100/583...
+Frame 150/583...
+Frame 200/583...
+Frame 250/583...
+Frame 300/583...
+Frame 350/583...
+Frame 400/583...
+Frame 450/583...
+Frame 500/583...
+Frame 550/583...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.4 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Running tracker and converting to nuScenes format...
+Results saved to ../../results/pp_swap_160/tracking_eval/tracking_results.json
+Calculating metrics...
+======
+Loading NuScenes tables for version v1.0-mini...
+34 category,
+0 attribute,
+4 visibility,
+2592 instance,
+2 sensor,
+2 calibrated_sensor,
+8346 ego_pose,
+1 log,
+43 scene,
+4173 sample,
+8346 sample_data,
+136348 sample_annotation,
+1 map,
+Done loading in 1.4 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.2 seconds.
+======
+Initializing nuScenes tracking evaluation
+Loaded results from ../../results/pp_swap_160/tracking_eval/tracking_results.json. Found detections for 583 samples.
+Loading annotations for mini_val split from nuScenes version: v1.0-mini
+  0%|          | 0/583 [00:00<?, ?it/s] 18%|█▊        | 104/583 [00:00<00:00, 1031.17it/s] 36%|███▌      | 208/583 [00:00<00:00, 987.98it/s]  53%|█████▎    | 307/583 [00:00<00:00, 874.70it/s] 68%|██████▊   | 396/583 [00:00<00:00, 788.09it/s] 82%|████████▏ | 477/583 [00:00<00:00, 640.03it/s]100%|██████████| 583/583 [00:00<00:00, 751.62it/s]100%|██████████| 583/583 [00:00<00:00, 779.20it/s]
+Loaded ground truth annotations for 583 samples.
+Filtering tracks
+=> Original number of boxes: 6942
+=> After distance based filtering: 6937
+=> After LIDAR points based filtering: 6937
+=> After bike rack filtering: 6937
+Filtering ground truth tracks
+=> Original number of boxes: 19601
+=> After distance based filtering: 19601
+=> After LIDAR points based filtering: 19558
+=> After bike rack filtering: 19558
+Accumulating metric data...
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:01,  3.18it/s] 29%|██▊       | 2/7 [00:00<00:02,  2.10it/s] 43%|████▎     | 3/7 [00:01<00:01,  2.10it/s] 57%|█████▋    | 4/7 [00:02<00:01,  1.74it/s] 71%|███████▏  | 5/7 [00:02<00:00,  2.40it/s] 86%|████████▌ | 6/7 [00:02<00:00,  3.04it/s]100%|██████████| 7/7 [00:03<00:00,  1.86it/s]                                             Computed thresholds
+
+  0%|          | 0/7 [00:00<?, ?it/s] 29%|██▊       | 2/7 [00:00<00:00, 16.47it/s] 57%|█████▋    | 4/7 [00:00<00:00, 14.87it/s]100%|██████████| 7/7 [00:00<00:00, 16.93it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.4098	0.145	0.970	0.157	583	21326	2725	17970	631	5687	2725	2331	631
+
+  0%|          | 0/7 [00:00<?, ?it/s] 29%|██▊       | 2/7 [00:00<00:00, 18.09it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.75it/s]100%|██████████| 7/7 [00:00<00:00, 17.46it/s]                                             		MOTAR	MOTP	Recall	Frames	GT	GT-Mtch	GT-Miss	GT-IDS	Pred	Pred-TP	Pred-FP	Pred-IDS
+thr_0.4188	0.243	0.957	0.131	583	21326	2316	18541	469	4539	2316	1754	469
+
+Computing metrics for class pedestrian...
+
+  0%|          | 0/7 [00:00<?, ?it/s] 14%|█▍        | 1/7 [00:00<00:01,  3.25it/s] 29%|██▊       | 2/7 [00:00<00:02,  2.15it/s] 43%|████▎     | 3/7 [00:01<00:01,  2.13it/s] 57%|█████▋    | 4/7 [00:02<00:01,  1.76it/s] 71%|███████▏  | 5/7 [00:02<00:00,  2.43it/s] 86%|████████▌ | 6/7 [00:02<00:00,  3.08it/s]100%|██████████| 7/7 [00:03<00:00,  1.87it/s]                                             DEBUG thresholds: [nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, 0.4098212063312531, 0.4188351911306381], recalls: [1.0, 0.976923076923, 0.953846153846, 0.930769230769, 0.907692307692, 0.884615384615, 0.861538461538, 0.838461538462, 0.815384615385, 0.792307692308, 0.769230769231, 0.746153846154, 0.723076923077, 0.7, 0.676923076923, 0.653846153846, 0.630769230769, 0.607692307692, 0.584615384615, 0.561538461538, 0.538461538462, 0.515384615385, 0.492307692308, 0.469230769231, 0.446153846154, 0.423076923077, 0.4, 0.376923076923, 0.353846153846, 0.330769230769, 0.307692307692, 0.284615384615, 0.261538461538, 0.238461538462, 0.215384615385, 0.192307692308, 0.169230769231, 0.146153846154, 0.123076923077, 0.1]
+  0%|          | 0/7 [00:00<?, ?it/s] 29%|██▊       | 2/7 [00:00<00:00, 16.90it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.26it/s]100%|██████████| 7/7 [00:00<00:00, 17.02it/s]                                               0%|          | 0/7 [00:00<?, ?it/s] 29%|██▊       | 2/7 [00:00<00:00, 17.97it/s] 57%|█████▋    | 4/7 [00:00<00:00, 15.94it/s]100%|██████████| 7/7 [00:00<00:00, 17.78it/s]                                             Calculating metrics...
+Saving metrics to: ../../results/pp_swap_160/tracking_eval
+
+### Final results ###
+
+Per-class results:
+		AMOTA	AMOTP	RECALL	MOTAR	GT	MOTA	MOTP	MT	ML	FAF	TP	FP	FN	IDS	FRAG	TID	LGD
+pedestr 	0.010	1.948	0.131	0.243	21326	0.026	0.957	3	347	300.9	2316	1754	18541	469	308	9.34	16.64
+
+Aggregated results:
+AMOTA	0.010
+AMOTP	1.948
+RECALL	0.131
+MOTAR	0.243
+GT	21326
+MOTA	0.026
+MOTP	0.957
+MT	3
+ML	347
+FAF	300.9
+TP	2316
+FP	1754
+FN	18541
+IDS	469
+FRAG	308
+TID	9.34
+LGD	16.64
+Eval time: 17.6s
+
+Rendering curves
+
+--- Evaluation Summary ---
+{'label_metrics': {'amota': {'pedestrian': 0.00968117285417756}, 'amotp': {'pedestrian': 1.9481772677954319}, 'recall': {'pedestrian': 0.13059176591953484}, 'motar': {'pedestrian': 0.2426597582037997}, 'gt': {'pedestrian': 21326.0}, 'mota': {'pedestrian': 0.02635280877801749}, 'motp': {'pedestrian': 0.9567420636411481}, 'mt': {'pedestrian': 3.0}, 'ml': {'pedestrian': 347.0}, 'faf': {'pedestrian': 300.85763293310464}, 'tp': {'pedestrian': 2316.0}, 'fp': {'pedestrian': 1754.0}, 'fn': {'pedestrian': 18541.0}, 'ids': {'pedestrian': 469.0}, 'frag': {'pedestrian': 308.0}, 'tid': {'pedestrian': 9.335249042145595}, 'lgd': {'pedestrian': 16.63984674329502}}, 'eval_time': 17.58529043197632, 'cfg': {'class_range': {'car': 50, 'truck': 50, 'bus': 50, 'trailer': 50, 'pedestrian': 40, 'motorcycle': 40, 'bicycle': 40}, 'dist_fcn': 'center_distance', 'dist_th_tp': 2.0, 'min_recall': 0.1, 'max_boxes_per_sample': 500, 'metric_worst': {'amota': 0.0, 'amotp': 2.0, 'recall': 0.0, 'motar': 0.0, 'mota': 0.0, 'motp': 2.0, 'mt': 0.0, 'ml': -1.0, 'faf': 500, 'gt': -1, 'tp': 0.0, 'fp': -1.0, 'fn': -1.0, 'ids': -1.0, 'frag': -1.0, 'tid': 20, 'lgd': 20}, 'num_thresholds': 40}, 'amota': 0.00968117285417756, 'amotp': 1.9481772677954319, 'recall': 0.13059176591953484, 'motar': 0.2426597582037997, 'gt': 21326.0, 'mota': 0.02635280877801749, 'motp': 0.9567420636411481, 'mt': 3.0, 'ml': 347.0, 'faf': 300.85763293310464, 'tp': 2316.0, 'fp': 1754.0, 'fn': 18541.0, 'ids': 469.0, 'frag': 308.0, 'tid': 9.335249042145595, 'lgd': 16.63984674329502, 'meta': {'use_camera': False, 'use_lidar': True, 'use_radar': False, 'use_map': False, 'use_external_tracking': False}}
